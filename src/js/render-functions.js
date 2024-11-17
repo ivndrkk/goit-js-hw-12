@@ -10,7 +10,7 @@ export function renderGallery(images, clearGallery = true) {
         galleryContainer.innerHTML = '';
     }
 
-    const imagesToDisplay = images.slice(0, 15);
+    const imagesToDisplay = images.slice(0, 50);
 
     const fragment = document.createDocumentFragment();
 

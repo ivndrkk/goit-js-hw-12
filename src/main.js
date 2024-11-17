@@ -11,7 +11,7 @@ const galleryContainer = document.querySelector('.gallery-container');
 const loadMoreBtn = document.querySelector('.load-more-btn');
 
 let page = 1;
-const perPage = 15;
+const perPage = 50;
 let currentQuery = '';
 
 async function fetchImages(query, pageNumber = 1) {
@@ -33,6 +33,8 @@ async function fetchImages(query, pageNumber = 1) {
         } else {
             renderGallery(data.hits, pageNumber === 1);
 
+            const totalPages = Math.ceil(data.totalHits / perPage); 
+
             if (pageNumber > 1) {
                 const imageItems = document.querySelectorAll('.image-item');
                 if (imageItems.length > 0) {
@@ -44,7 +46,7 @@ async function fetchImages(query, pageNumber = 1) {
                 }
             }
 
-            if (data.hits.length + pageNumber * perPage >= data.totalHits) {
+            if (page > totalPages) {
                 loadMoreBtn.style.display = 'none';
                 iziToast.show({
                     message:"We're sorry, but you've reached the end of search results.",
